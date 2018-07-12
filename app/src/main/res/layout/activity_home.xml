@@ -25,7 +25,7 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="79dp"
-        android:text="Create"
+        android:text="Take Pic"
         tools:layout_editor_absoluteX="47dp"
         tools:layout_editor_absoluteY="385dp" />
 
@@ -51,11 +51,12 @@
 
     <ImageView
         android:id="@+id/ivImage"
-        android:layout_width="118dp"
-        android:layout_height="112dp"
-        android:layout_alignParentEnd="true"
+        android:layout_width="149dp"
+        android:layout_height="178dp"
         android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
         android:layout_marginTop="18dp"
         app:srcCompat="@color/colorPrimary" />
+
 
 </RelativeLayout>

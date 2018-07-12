@@ -2,6 +2,7 @@ package com.example.nvjscholar.parstagram;
 
 import android.app.Application;
 
+import com.example.nvjscholar.parstagram.models.Post;
 import com.parse.Parse;
 import com.parse.ParseObject;
 

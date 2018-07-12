@@ -16,14 +16,14 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.parse.FindCallback;
+import com.example.nvjscholar.parstagram.models.Post;
 import com.parse.ParseException;
 import com.parse.ParseFile;
 import com.parse.ParseUser;
 import com.parse.SaveCallback;
 
 import java.io.File;
-import java.util.List;
+import java.util.ArrayList;
 
 public class HomeActivity extends AppCompatActivity {
 
@@ -31,10 +31,13 @@ public class HomeActivity extends AppCompatActivity {
    private Button create;
    private Button post;
    private Button refresh;
-    public final String APP_TAG = "MyCustomApp";
-    public final static int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 1034;
-    public String photoFileName = "photo.jpg";
-    File photoFile;
+   private ImageView ivimage;
+   public final String APP_TAG = "MyCustomApp";
+   public final static int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 1034;
+   public String photoFileName = "photo.jpg";
+   File photoFile;
+    PostAdapter postAdapter;
+    ArrayList<Post> posts;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +48,7 @@ public class HomeActivity extends AppCompatActivity {
         create = findViewById(R.id.createbttn);
         refresh = findViewById(R.id.bttnRefresh);
         post = findViewById(R.id.bttnpost);
+        ivimage = findViewById(R.id.ivImage);
 
         create.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -72,7 +76,9 @@ public class HomeActivity extends AppCompatActivity {
         refresh.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                loadTopPosts();
+                Intent intent = new Intent(HomeActivity.this, TimelineActivity.class);
+                startActivity(intent);
+                finish();
             }
         });
 
@@ -99,29 +105,6 @@ public class HomeActivity extends AppCompatActivity {
         });
     }
 
-    private void loadTopPosts(){
-        final Post.Query postsQuery = new Post.Query();
-        postsQuery.findInBackground(new FindCallback<Post>() {
-            @Override
-            public void done(List<Post> objects, ParseException e) {
-                if(e == null){
-                    for(int i = 0; i < objects.size(); i++){
-                        try {
-                            Log.d("HomeActivity", "Post[" + i + "] = "
-                                    + objects.get(i).getDescription()
-                                    +"\nusername = " + objects.get(i).getUser().fetchIfNeeded().getUsername());
-                        } catch (ParseException e1) {
-                            e1.printStackTrace();
-                        }
-                    }
-                }
-                else{
-                    e.printStackTrace();
-                }
-            }
-        });
-
-    }
 
 
     public void onLaunchCamera() {
