@@ -55,9 +55,9 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder>{
     }
 
     public void addAll(List<Post> posts) {
-       posts.clear();
-       posts.addAll(posts);
-       notifyDataSetChanged();
+        //posts.clear();
+        posts.addAll(posts);
+        notifyDataSetChanged();
 
     }
 
@@ -75,6 +75,8 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder>{
             ivPic = (ImageView) itemView.findViewById(R.id.ivPic);
             tvUser = (TextView) itemView.findViewById(R.id.tvUser);
             tvDes = (TextView) itemView.findViewById(R.id.tvDes);
+
+
         }
     }
 }

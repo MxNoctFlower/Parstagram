@@ -41,32 +41,26 @@ public class TimelineActivity extends AppCompatActivity {
         //set adapter
         rvPosts.setAdapter(postAdapter);
         loadTopPosts();
-
     }
 
     private void loadTopPosts(){
         final Post.Query postsQuery = new Post.Query();
         postsQuery.getTop().attachUser();
+
         postsQuery.findInBackground(new FindCallback<Post>() {
             @Override
             public void done(List<Post> objects, ParseException e) {
-                if(e == null){
-     //               for(int i = 0; i < objects.size(); i++){
-     //                   try {
-     //                       Log.d("HomeActivity", "Post[" + i + "] = "
-     //                              + objects.get(i).getDescription()
-     //                               +"\nusername = " + objects.get(i).getUser().fetchIfNeeded().getUsername());
-     //                   } catch (ParseException e1) {
-     //                       e1.printStackTrace();
-      //                  }
-                    postAdapter.addAll(objects);
-                    postAdapter.notifyItemInserted(posts.size()-1);
+                if(e == null) {
+                    //addAll method was not working!
+                    for (int i = 0; i < objects.size(); i++) {
+                        posts.add(objects.get(i));
+                        postAdapter.notifyDataSetChanged();
+                    }
                 }
-                else{
+                else {
                     e.printStackTrace();
                 }
             }
         });
-
     }
 }
