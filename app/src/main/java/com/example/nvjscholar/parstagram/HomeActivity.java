@@ -97,6 +97,9 @@ public class HomeActivity extends AppCompatActivity {
             public void done(ParseException e) {
                 if(e == null){
                     Log.d("HomeActivity", "Created post successfully!");
+                    Intent intent = new Intent(HomeActivity.this, TimelineActivity.class);
+                    setResult(1, intent);
+                    finish();
                 }
                 else{
                     e.printStackTrace();
