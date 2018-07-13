@@ -8,4 +8,11 @@
         android:title="Post"
         android:onClick="ToPost">
     </item>
+    <item
+        android:id="@+id/LogOut"
+        android:icon="@android:drawable/ic_delete"
+        app:showAsAction="ifRoom"
+        android:title="LogOut"
+        android:onClick="LogOut">
+    </item>
 </menu>

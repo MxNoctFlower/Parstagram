@@ -12,24 +12,22 @@ import android.view.MenuItem;
 import com.example.nvjscholar.parstagram.models.Post;
 import com.parse.FindCallback;
 import com.parse.ParseException;
+import com.parse.ParseUser;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class TimelineActivity extends AppCompatActivity {
 
-//    private Post post;
     PostAdapter postAdapter;
     ArrayList<Post> posts;
     RecyclerView rvPosts;
-//    Context context;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_timeline);
 
-//        context = this;
 
         //find RecyclerView
         rvPosts = (RecyclerView) findViewById(R.id.rvPosts);
@@ -63,6 +61,14 @@ public class TimelineActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
 
         loadTopPosts();
+    }
+
+    public void LogOut(MenuItem mi){
+        ParseUser.logOut();
+        ParseUser currentUser = ParseUser.getCurrentUser();
+        Intent intent = new Intent(TimelineActivity.this, LoginActivity.class);
+        startActivity(intent);
+        finish();
     }
 
     private void loadTopPosts(){
