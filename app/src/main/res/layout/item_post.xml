@@ -8,11 +8,11 @@
 
     <ImageView
         android:id="@+id/ivPic"
-        android:layout_width="138dp"
-        android:layout_height="155dp"
+        android:layout_width="374dp"
+        android:layout_height="307dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="156dp"
+        android:layout_marginTop="17dp"
         app:srcCompat="@android:color/black"
         tools:layout_editor_absoluteX="123dp"
         tools:layout_editor_absoluteY="38dp" />

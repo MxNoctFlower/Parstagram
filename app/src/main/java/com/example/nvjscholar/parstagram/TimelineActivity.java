@@ -3,6 +3,7 @@ package com.example.nvjscholar.parstagram;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -22,11 +23,15 @@ public class TimelineActivity extends AppCompatActivity {
     PostAdapter postAdapter;
     ArrayList<Post> posts;
     RecyclerView rvPosts;
+    private SwipeRefreshLayout swipeContainer;
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_timeline);
+        swipeContainer = (SwipeRefreshLayout) findViewById(R.id.swipeContainer);
+
 
 
         //find RecyclerView
@@ -42,6 +47,28 @@ public class TimelineActivity extends AppCompatActivity {
         //set adapter
         rvPosts.setAdapter(postAdapter);
         loadTopPosts();
+
+        swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                // Your code to refresh the list here.
+                // Make sure you call swipeContainer.setRefreshing(false)
+                // once the network request has completed successfully.
+                fetchTimelineAsync(0);
+            }
+        });
+        // Configure the refreshing colors
+        swipeContainer.setColorSchemeResources(android.R.color.holo_blue_bright,
+                android.R.color.holo_green_light,
+                android.R.color.holo_orange_light,
+                android.R.color.holo_red_light);
+
+    }
+
+    private void fetchTimelineAsync(int i) {
+        postAdapter.clear();
+        loadTopPosts();
+        swipeContainer.setRefreshing(false);
     }
 
     @Override
@@ -60,6 +87,7 @@ public class TimelineActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
+        postAdapter.clear();
         loadTopPosts();
     }
 
@@ -80,8 +108,8 @@ public class TimelineActivity extends AppCompatActivity {
             public void done(List<Post> objects, ParseException e) {
                 if(e == null) {
                     //addAll method was not working!
-                    for (int i = 0; i < objects.size(); i++) {
-                        posts.add(objects.get(i));
+                    for (int i = objects.size(); i > 0; i--) {
+                        posts.add(objects.get(i-1));
                         postAdapter.notifyDataSetChanged();
                     }
                 }
