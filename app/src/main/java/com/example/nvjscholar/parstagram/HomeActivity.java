@@ -30,7 +30,6 @@ public class HomeActivity extends AppCompatActivity {
    private EditText etdescription;
    private Button create;
    private Button post;
-   private Button refresh;
    private ImageView ivimage;
    public final String APP_TAG = "MyCustomApp";
    public final static int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 1034;
@@ -46,7 +45,6 @@ public class HomeActivity extends AppCompatActivity {
 
         etdescription = findViewById(R.id.etDescription);
         create = findViewById(R.id.createbttn);
-        refresh = findViewById(R.id.bttnRefresh);
         post = findViewById(R.id.bttnpost);
         ivimage = findViewById(R.id.ivImage);
 
@@ -70,15 +68,6 @@ public class HomeActivity extends AppCompatActivity {
                        CreatePost(description, parsefile, user);
                     }
                 });
-            }
-        });
-
-        refresh.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(HomeActivity.this, TimelineActivity.class);
-                startActivity(intent);
-                finish();
             }
         });
 

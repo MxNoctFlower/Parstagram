@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/watercolor"
     tools:context=".HomeActivity">
 
     <EditText
@@ -24,21 +25,10 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="79dp"
+        android:layout_marginBottom="27dp"
         android:text="Take Pic"
         tools:layout_editor_absoluteX="47dp"
         tools:layout_editor_absoluteY="385dp" />
-
-    <Button
-        android:id="@+id/bttnRefresh"
-        android:layout_width="296dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="15dp"
-        android:text="Refresh"
-        tools:layout_editor_absoluteX="43dp"
-        tools:layout_editor_absoluteY="445dp" />
 
     <Button
         android:id="@+id/bttnpost"
@@ -46,7 +36,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="150dp"
+        android:layout_marginBottom="109dp"
         android:text="Post" />
 
     <ImageView
