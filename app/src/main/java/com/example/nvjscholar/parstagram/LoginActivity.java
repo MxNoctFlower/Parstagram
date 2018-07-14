@@ -22,32 +22,40 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+        ParseUser currentUser = ParseUser.getCurrentUser();
+        if (currentUser != null) {
+            Log.d("LoginActivity", "Login Successful");
+            final Intent intent = new Intent(LoginActivity.this, TimelineActivity.class);
+            startActivity(intent);
+            finish();
+        } else {
+            setContentView(R.layout.activity_login);
 
-        usernameInput = findViewById(R.id.etUsername);
-        passwordInput = findViewById(R.id.etPassword);
-        loginBttn = findViewById(R.id.bttnlogin);
-        signcreate = findViewById(R.id.bttnsignup);
+            usernameInput = findViewById(R.id.etUsername);
+            passwordInput = findViewById(R.id.etPassword);
+            loginBttn = findViewById(R.id.bttnlogin);
+            signcreate = findViewById(R.id.bttnsignup);
 
-        loginBttn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                final String username = usernameInput.getText().toString();
-                final String password = passwordInput.getText().toString();
-                login(username, password);
+            loginBttn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    final String username = usernameInput.getText().toString();
+                    final String password = passwordInput.getText().toString();
+                    login(username, password);
 
-            }
-        });
+                }
+            });
 
-        signcreate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(LoginActivity.this, SignUpActivity.class);
-                startActivity(intent);
-            }
-        });
+            signcreate.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(LoginActivity.this, SignUpActivity.class);
+                    startActivity(intent);
+                }
+            });
 
 
+        }
     }
 
     private void login(String username, String password){
